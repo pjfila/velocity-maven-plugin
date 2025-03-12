@@ -12,6 +12,9 @@ import java.util.Properties;
 import org.apache.maven.model.FileSet;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -23,56 +26,46 @@ import org.codehaus.plexus.util.FileUtils;
 /**
  * @author www.slide.se
  * @author javamonkey79 - Shaun Elliott
- *
- * @goal velocity
  */
+@Mojo(name = "velocity", defaultPhase = LifecyclePhase.NONE)
 public class VelocityMojo extends AbstractMojo {
 	
 	/**
 	 * The maven project.
-	 *
-	 * @parameter property="project"
-	 * @readonly
 	 */
+	@Parameter(property = "project", readonly = true)
 	private MavenProject project;
 	
 	/**
 	 * The character encoding scheme to be applied when filtering resources. Must not be null.
-	 *
-	 * @parameter property="encoding" default-value="${project.build.sourceEncoding}"
 	 */
+	@Parameter(property = "encoding", defaultValue = "${project.build.sourceEncoding}")
 	private String encoding;
 	
 	/**
 	 * Location of the file. Defaults to project.build.directory.
-	 *
-	 * @parameter property="project.build.directory"
-	 * @required
 	 */
+	@Parameter(property = "outputDirectory", required = true)
 	private File outputDirectory;
 	
 	/**
 	 * Template files. The files to apply velocity on.
-	 *
-	 * @parameter
-	 * @required
 	 */
+	@Parameter(property = "templateFiles", required = true)
 	private FileSet templateFiles;
 	
 	/**
 	 * Template values
-	 *
-	 * @parameter
 	 */
+	@Parameter(property = "templateValues")
 	private Properties templateValues;
 	
 	/**
 	 * Set this parameter if you want the plugin to remove an unwanted extension when saving result.<br>
 	 * For example {@code "foo.xml.vtl"} will become {@code "foo.xml"} if removeExtension = {@code '.vtl'}.<br>
 	 * Null and empty means no substition.
-	 *
-	 * @parameter
 	 */
+	@Parameter(property = "removeExtension")
 	private String removeExtension;
 	
 	/**
@@ -85,7 +78,7 @@ public class VelocityMojo extends AbstractMojo {
 		getLog().info("velocity....");
 		try {
 			velocity = new VelocityEngine();
-			velocity.setProperty(VelocityEngine.RUNTIME_LOG_LOGSYSTEM, new LogHandler(this));
+			velocity.setProperty(VelocityEngine.RUNTIME_LOG_INSTANCE, new LogHandler(this));
 			velocity.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, project.getBasedir().getAbsolutePath());
 			
 			velocity.init();
