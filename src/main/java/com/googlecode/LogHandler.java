@@ -1,81 +1,325 @@
 package com.googlecode;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.velocity.runtime.RuntimeServices;
-import org.apache.velocity.runtime.log.LogChute;
+import org.apache.maven.plugin.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.Marker;
 
-/**
- * @author last modified by: $Author$
- * @version $Revision$ $Date$
- */
-public class LogHandler implements LogChute {
-	
-	private AbstractMojo mojo;
-	
-	public LogHandler(AbstractMojo velocityMojo) {
-		this.mojo = velocityMojo;
-	}
-	
-	public boolean isLevelEnabled(int level) {
-		final boolean enabled;
-		if (level == DEBUG_ID && mojo.getLog().isDebugEnabled()) {
-			enabled = true;
-		} else if (level == INFO_ID && mojo.getLog().isInfoEnabled()) {
-			enabled = true;
-		} else if (level == WARN_ID && mojo.getLog().isWarnEnabled()) {
-			enabled = true;
-		} else if (level == ERROR_ID && mojo.getLog().isErrorEnabled()) {
-			enabled = true;
-		} else {
-			enabled = false;
-		}
-		return enabled;
-	}
-	
-	public void log(int level, String content) {
-		if (!isLevelEnabled(level)) {
-			return;
-		}
-		switch (level) {
-			case DEBUG_ID:
-				mojo.getLog().debug(content);
-				break;
-			case INFO_ID:
-				mojo.getLog().info(content);
-				break;
-			case WARN_ID:
-				mojo.getLog().warn(content);
-				break;
-			case ERROR_ID:
-				mojo.getLog().error(content);
-				break;
-			default:
-		}
-	}
-	
-	public void log(int level, String content, Throwable throwable) {
-		if (!isLevelEnabled(level)) {
-			return;
-		}
-		switch (level) {
-			case DEBUG_ID:
-				mojo.getLog().debug(content, throwable);
-				break;
-			case INFO_ID:
-				mojo.getLog().info(content, throwable);
-				break;
-			case WARN_ID:
-				mojo.getLog().warn(content, throwable);
-				break;
-			case ERROR_ID:
-				mojo.getLog().error(content, throwable);
-				break;
-			default:
-		}
-	}
-	
-	// LogChute implementation
-	public void init(RuntimeServices runtimeServices) throws Exception {
-		// Left empty
-	}
+import static org.slf4j.helpers.MessageFormatter.arrayFormat;
+
+public class LogHandler implements Logger {
+
+    private final Log log;
+
+    LogHandler(VelocityMojo velocityMojo) {
+        log = velocityMojo.getLog();
+    }
+
+    @Override
+    public String getName() {
+        return "velocity";
+    }
+
+    @Override
+    public boolean isTraceEnabled() {
+        return false;
+    }
+
+    @Override
+    public void trace(String s) {
+        // no-po
+    }
+
+    @Override
+    public void trace(String s, Object o) {
+        // no-po
+    }
+
+    @Override
+    public void trace(String s, Object o, Object o1) {
+        // no-po
+    }
+
+    @Override
+    public void trace(String s, Object... objects) {
+        // no-po
+    }
+
+    @Override
+    public void trace(String s, Throwable throwable) {
+        // no-po
+    }
+
+    @Override
+    public boolean isTraceEnabled(Marker marker) {
+        return false;
+    }
+
+    @Override
+    public void trace(Marker marker, String s) {
+        // no-po
+    }
+
+    @Override
+    public void trace(Marker marker, String s, Object o) {
+        // no-po
+    }
+
+    @Override
+    public void trace(Marker marker, String s, Object o, Object o1) {
+        // no-po
+    }
+
+    @Override
+    public void trace(Marker marker, String s, Object... objects) {
+        // no-po
+    }
+
+    @Override
+    public void trace(Marker marker, String s, Throwable throwable) {
+        // no-po
+    }
+
+    @Override
+    public boolean isDebugEnabled() {
+        return log.isDebugEnabled();
+    }
+
+    @Override
+    public void debug(String s) {
+        log.debug(s);
+    }
+
+    @Override
+    public void debug(String s, Object o) {
+        log.debug(format(s, o));
+    }
+
+    @Override
+    public void debug(String s, Object o, Object o1) {
+        log.debug(format(s, o, o1));
+    }
+
+    @Override
+    public void debug(String s, Object... objects) {
+        log.debug(format(s, objects));
+    }
+
+    @Override
+    public void debug(String s, Throwable throwable) {
+        log.debug(s, throwable);
+    }
+
+    @Override
+    public boolean isDebugEnabled(Marker marker) {
+        return isDebugEnabled();
+    }
+
+    @Override
+    public void debug(Marker marker, String s) {
+        log.debug(s);
+    }
+
+    @Override
+    public void debug(Marker marker, String s, Object o) {
+        log.debug(format(s, o));
+    }
+
+    @Override
+    public void debug(Marker marker, String s, Object o, Object o1) {
+        log.debug(format(s, o, o1));
+    }
+
+    @Override
+    public void debug(Marker marker, String s, Object... objects) {
+        log.debug(format(s, objects));
+    }
+
+    @Override
+    public void debug(Marker marker, String s, Throwable throwable) {
+        log.debug(s, throwable);
+    }
+
+    @Override
+    public boolean isInfoEnabled() {
+        return log.isInfoEnabled();
+    }
+
+    @Override
+    public void info(String s) {
+        log.info(s);
+    }
+
+    @Override
+    public void info(String s, Object o) {
+        log.info(format(s, o));
+    }
+
+    @Override
+    public void info(String s, Object o, Object o1) {
+        log.info(format(s, o, o1));
+    }
+
+    @Override
+    public void info(String s, Object... objects) {
+        log.info(format(s, objects));
+    }
+
+    @Override
+    public void info(String s, Throwable throwable) {
+        log.info(s, throwable);
+    }
+
+    @Override
+    public boolean isInfoEnabled(Marker marker) {
+        return log.isInfoEnabled();
+    }
+
+    @Override
+    public void info(Marker marker, String s) {
+        log.info(s);
+    }
+
+    @Override
+    public void info(Marker marker, String s, Object o) {
+        log.info(format(s, o));
+    }
+
+    @Override
+    public void info(Marker marker, String s, Object o, Object o1) {
+        log.info(format(s, o, o1));
+    }
+
+    @Override
+    public void info(Marker marker, String s, Object... objects) {
+        log.info(format(s, objects));
+    }
+
+    @Override
+    public void info(Marker marker, String s, Throwable throwable) {
+        log.info(s, throwable);
+    }
+
+    @Override
+    public boolean isWarnEnabled() {
+        return log.isWarnEnabled();
+    }
+
+    @Override
+    public void warn(String s) {
+        log.warn(s);
+    }
+
+    @Override
+    public void warn(String s, Object o) {
+        log.warn(format(s, o));
+    }
+
+    @Override
+    public void warn(String s, Object... objects) {
+        log.warn(format(s, objects));
+    }
+
+    @Override
+    public void warn(String s, Object o, Object o1) {
+        log.warn(format(s, o, o1));
+    }
+
+    @Override
+    public void warn(String s, Throwable throwable) {
+        log.warn(s, throwable);
+    }
+
+    @Override
+    public boolean isWarnEnabled(Marker marker) {
+        return log.isWarnEnabled();
+    }
+
+    @Override
+    public void warn(Marker marker, String s) {
+        log.warn(s);
+    }
+
+    @Override
+    public void warn(Marker marker, String s, Object o) {
+        log.warn(format(s, o));
+    }
+
+    @Override
+    public void warn(Marker marker, String s, Object o, Object o1) {
+        log.warn(format(s, o, o1));
+    }
+
+    @Override
+    public void warn(Marker marker, String s, Object... objects) {
+        log.warn(format(s, objects));
+    }
+
+    @Override
+    public void warn(Marker marker, String s, Throwable throwable) {
+        log.warn(s, throwable);
+    }
+
+    @Override
+    public boolean isErrorEnabled() {
+        return log.isErrorEnabled();
+    }
+
+    @Override
+    public void error(String s) {
+        log.error(s);
+    }
+
+    @Override
+    public void error(String s, Object o) {
+        log.error(format(s, o));
+    }
+
+    @Override
+    public void error(String s, Object o, Object o1) {
+        log.error(format(s, o, o1));
+    }
+
+    @Override
+    public void error(String s, Object... objects) {
+        log.error(format(s, objects));
+    }
+
+    @Override
+    public void error(String s, Throwable throwable) {
+        log.error(s, throwable);
+    }
+
+    @Override
+    public boolean isErrorEnabled(Marker marker) {
+        return log.isErrorEnabled();
+    }
+
+    @Override
+    public void error(Marker marker, String s) {
+        log.error(s);
+    }
+
+    @Override
+    public void error(Marker marker, String s, Object o) {
+        log.error(format(s, o));
+    }
+
+    @Override
+    public void error(Marker marker, String s, Object o, Object o1) {
+        log.error(format(s, o, o1));
+    }
+
+    @Override
+    public void error(Marker marker, String s, Object... objects) {
+        log.error(format(s, objects));
+    }
+
+    @Override
+    public void error(Marker marker, String s, Throwable throwable) {
+        log.error(s, throwable);
+    }
+
+    private String format(String messagePattern, Object... objects) {
+        return arrayFormat(messagePattern, objects).getMessage();
+    }
 }
