@@ -4,15 +4,13 @@
 
 The plugin name is velocity-maven-plugin and there is a single goal: `velocity`.
 
-Original code is available on [google code project](https://code.google.com/p/velocity-maven-plugin/).
-
-Version 1.1.0
+Version pjfila-1.1.0
 * New VelocityContext for each generated file
 * Add extraVelocityProperties configuration
 * Add removePrefix configuration
 * Added unit tests + refactor parts
 
-Version 1.0.0
+Version pjfila-1.0.0 (forked from [vdubus/velocity-maven-plugin](https://github.com/vdubus/velocity-maven))
 * Upgrade Velocity to version 2.4.1
 
 ## Example Addition to POM
