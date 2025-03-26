@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.pjfila</groupId>
+    <artifactId>velocity-maven-plugin-test-minimal</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Test Velocity Maven plugin minimal</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.pjfila</groupId>
+                <artifactId>velocity-maven-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>target</outputDirectory>
+                    <resourceLoaderPath>
+                        <path>${project.basedir}/templates</path>
+                    </resourceLoaderPath>
+                    <templateFiles>
+                        <directory>templates</directory>
+                        <includes>**/*.vm</includes>
+                        <excludes>**/include/*</excludes>
+                    </templateFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

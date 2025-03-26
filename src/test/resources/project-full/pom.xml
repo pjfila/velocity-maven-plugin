@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.pjfila</groupId>
+    <artifactId>velocity-maven-plugin-test-full</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Test Velocity Maven plugin full</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.pjfila</groupId>
+                <artifactId>velocity-maven-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>target</outputDirectory>
+                    <resourceLoaderPath>
+                        <path>${project.basedir}/templates</path>
+                        <path>${project.basedir}/extra-include</path>
+                    </resourceLoaderPath>
+                    <templateFiles>
+                        <directory>templates</directory>
+                        <includes>
+                            <include>**/*.vm</include>
+                            <include>**/tmpl.*</include>
+                        </includes>
+                        <excludes>**/include/*</excludes>
+                    </templateFiles>
+                    <templateValues>
+                        <alpha>ALPHA</alpha>
+                        <beta>BETA</beta>
+                    </templateValues>
+                    <extraProperties>
+                        <!-- this false by default and we'll test that in the template that this is in effect -->
+                        <directive.if.empty_check>false</directive.if.empty_check>
+                    </extraProperties>
+                    <removeExtension>.vm</removeExtension>
+                    <removePrefix>tmpl.</removePrefix>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

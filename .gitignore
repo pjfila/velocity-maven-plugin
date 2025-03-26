@@ -1,6 +1,8 @@
 /target/
+**/resources/project-*/target/**
 
 .project
 .settings/
 .classpath
 .externalToolBuilders/velocity-maven-builder.launch
+/.idea/

@@ -1,4 +1,4 @@
-package com.googlecode;
+package io.github.pjfila.maven.velocity;
 
 import org.apache.maven.plugin.logging.Log;
 import org.slf4j.Logger;

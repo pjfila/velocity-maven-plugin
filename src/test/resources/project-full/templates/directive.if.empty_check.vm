@@ -1,0 +1,4 @@
+#include( "includes/header.vm" )
+#include( "extra.vm" )
+#set( $empty_var = "" )
+EMPTY VAR IS#if( $empty_var ) TRUE#else FALSE#end
