@@ -6,7 +6,7 @@ The plugin name is velocity-maven-plugin and there is a single goal: `velocity`.
 
 Version pjfila-1.1.0
 * New VelocityContext for each generated file
-* Add extraVelocityProperties configuration
+* Add extraProperties configuration
 * Add removePrefix configuration
 * Added unit tests + refactor parts
 
