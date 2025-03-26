@@ -19,12 +19,12 @@ Version 1.0.0
 
 ```xml
 <plugin>
-	<groupId>com.github.pjfila</groupId>
+	<groupId>io.github.pjfila</groupId>
 	<artifactId>velocity-maven-plugin</artifactId>
 	<version>1.1.0</version>
 	<executions>
 		<execution>
-			<id>Generate source velocity</id>
+			<id>Generate sources with Apache Velocity</id>
 			<phase>generate-sources</phase>
 			<goals>
 				<goal>velocity</goal>
@@ -48,11 +48,12 @@ Version 1.0.0
 
 ## Options
 
-| Option Name             | Default                         | Notes                                                                                                                                                          |
-|-------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| encoding                | ${project.build.sourceEncoding} | This option also has null check that sets the value to "UTF-8"                                                                                                 |
-| outputDirectory         | ${project.build.directory}      |                                                                                                                                                                |
-| removeExtension         | no default                      | Set this parameter if you want the plugin to remove an unwanted extension when saving result. For example foo.xml.vtl ==> foo.xml if removeExtension = '.vtl'. |
-| templateFiles           | Required, no default.           | This is required, but a default may be added later                                                                                                             |
-| templateValues          | Required, no default.           | This is the properties list you wish to have merged with your templates                                                                                        |
-| extraVelocityProperties | no default                      | Extra properties to set for the Velcity Engine                                                                                                                 |
+| Option Name     | Default                         | Notes                                                                                                             |
+|-----------------|---------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| encoding        | ${project.build.sourceEncoding} | This option also has null check that sets the value to "UTF-8"                                                    |
+| outputDirectory | ${project.build.directory}      |                                                                                                                   |
+| removeExtension | no default                      | Remove an unwanted extension when saving result. For example foo.xml.vtl ==> foo.xml if removeExtension = '.vtl'. |
+| removePrefix    | no default                      | Remove an unwanted prefix when saving result. For example foo.xml.vtl ==> xml.vtl if removePrefix = 'foo.'.       |
+| templateFiles   | Required, no default.           |                                                                                                                   |
+| templateValues  | Required, no default.           | This is the properties list you wish to have merged with your templates                                           |
+| extraProperties | no default                      | Extra properties to set for the Velocity Engine                                                                   |
